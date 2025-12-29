@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Coconut ❤️</title>
+    <style>
+        :root {
+            --pink: #ffafcc;
+            --dark-pink: #ff8fab;
+            --soft-pink: #fdf0f0;
+            --accent: #fb6f92;
+            --text-color: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #fdf0f0 0%, #ffc2d1 100%);
+            text-align: center;
+            padding: 20px;
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Login Screen */
+        #login-box {
+            margin-top: 80px;
+            background: white;
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 143, 171, 0.3);
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid var(--pink);
+        }
+
+        input {
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--pink);
+            margin-bottom: 15px;
+            width: 80%;
+            font-size: 18px;
+            text-align: center;
+            outline: none;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(251, 111, 146, 0.4);
+        }
+
+        button:hover {
+            background: var(--dark-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        #main-content {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 { color: var(--accent); margin-top: 20px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 10px;
+        }
+
+        .card {
+            background: white;
+            color: var(--accent);
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--pink);
+            line-height: 1.3;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: var(--soft-pink);
+        }
+
+        /* Pop-up Overlay */
+        #letter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .letter-content {
+            background: white;
+            width: 80%;
+            max-width: 350px;
+            padding: 40px 25px;
+            border-radius: 30px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        #textContent {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .screenshot-note {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-box">
+        <h2 style="color: var(--accent);">🔒 Secret Access</h2>
+        <p>Enter our special 4-digit date:</p>
+        <input type="password" id="passInput" placeholder="xxxx" inputmode="numeric">
+        <br>
+        <button onclick="unlock()">Enter My Heart</button>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <h1>Hi my love! ❤️</h1>
+        <p>Pick a card for whatever you're feeling right now.</p>
+        
+        <div class="grid">
+            <div class="card" onclick="showLetter('missMe')">Open when you miss me</div>
+            <div class="card" onclick="showLetter('badDay')">Open when you're stressed</div>
+            <div class="card" onclick="showLetter('loveNote')">Daily Love Note</div>
+            <div class="card" onclick="showLetter('coupon')">LDR Coupon</div>
+        </div>
+
+        <p style="margin-top: 40px; font-size: 0.8rem; color: var(--accent);">I love you forever & always.</p>
+    </div>
+
+    <div id="letter-overlay" onclick="closeLetter()">
+        <div class="letter-content" onclick="event.stopPropagation()">
+            <div id="textContent"></div>
+            <button onclick="closeLetter()">Close</button>
+            <div class="screenshot-note">Screenshot to save this!</div>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const secretPassword = "coconut"; // Change this to your 4-digit date
+
+        const library = {
+            missMe: [
+                "I'm thinking about you right now too. Close your eyes, I'm hugging you! 🫂",
+                "Distance is just a test to see how far love can travel. We are winning.",
+                "I miss your voice. If you're free, send me a quick voice note of your day?",
+                "Look at the moon tonight; we're both under the same sky. 🌙",
+            ],
+            badDay: [
+                "I'm so sorry today was hard. You're the strongest person I know. ❤️",
+                "Take a deep breath. Inhale the good, exhale the stress. I'm in your corner.",
+                "Go wash your face with cold water. It's a tiny reset. I love you!",
+                "You are allowed to have a bad day, but remember you are still an incredible person to me.",
+                "Whatever is bothering you won't matter in a year. But I'll still love you."
+            ],
+            loveNote: [
+                "You are my favorite thought. Every single day.",
+                "Thank you for being mine. I love you more than words can ever express.",
+                "I can't wait until we don't have to say goodbye anymore.",
+                "You make me the happiest person in the world, even from miles away.",
+                "I love you more than the miles between us."
+            ],
+            coupon: [
+                "🎟️ COUPON: AFaceTime date where we play your favorite game (yes we can play minecraft ;)).",
+                "🎟️ COUPON: A 'Movie Night' where I let you pick the film (no complaining!).",
+                "🎟️ COUPON: A 10-minute 'I'm busy but I love you' phone call anytime.",
+            ]
+        };
+
+        // --- FUNCTIONS ---
+        function unlock() {
+            const input = document.getElementById('passInput').value;
+            if(input === secretPassword) {
+                document.getElementById('login-box').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+            } else {
+                alert("Wrong date! Try again, coconut.");
+            }
+        }
+
+        function showLetter(category) {
+            const options = library[category];
+            const pick = options[Math.floor(Math.random() * options.length)];
+            document.getElementById('textContent').innerText = pick;
+            document.getElementById('letter-overlay').style.display = 'flex';
+        }
+
+        function closeLetter() {
+            document.getElementById('letter-overlay').style.display = 'none';
+        }
+
+        // Allow 'Enter' key to log in
+        document.getElementById("passInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                unlock();
+            }
+        });
+    </script>
+</body>
+</html>
