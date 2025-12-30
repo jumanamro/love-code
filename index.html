@@ -5,20 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Coconut ❤️</title>
     <style>
-        /* THEME: OLD MONEY / VINTAGE BLACK & WHITE */
         :root {
-            --bg-color: #f8f5f2; /* Vintage Cream Paper */
-            --primary-black: #1a1a1a; /* Elegant Black */
+            --bg-color: #f8f5f2; 
+            --primary-black: #1a1a1a; 
             --pure-white: #ffffff;
-            --ruby-red: #a4161a; /* Sophisticated Red */
-            --border-gold: #d4af37; /* Subtle Gold Accent */
+            --ruby-red: #a4161a; 
         }
 
         body {
-            font-family: 'Times New Roman', Times, serif; /* Classic Serif */
+            font-family: 'Times New Roman', Times, serif;
             background-color: var(--bg-color);
             background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
-            background-size: 20px 20px; /* Subtle paper texture */
+            background-size: 20px 20px;
             text-align: center;
             padding: 20px;
             color: var(--primary-black);
@@ -31,7 +29,6 @@
 
         .hidden { display: none !important; }
 
-        /* Login Screen */
         #login-box {
             margin-top: 100px;
             background: var(--pure-white);
@@ -67,12 +64,8 @@
             transition: 0.4s;
         }
 
-        button:hover {
-            background: var(--ruby-red);
-            border-color: var(--ruby-red);
-        }
+        button:hover { background: var(--ruby-red); border-color: var(--ruby-red); }
 
-        /* Main Content */
         h1 { font-style: italic; font-weight: 400; font-size: 2.5rem; margin-bottom: 5px; }
         .heart-divider { color: var(--ruby-red); font-size: 1.5rem; margin-bottom: 30px; }
 
@@ -108,12 +101,8 @@
             box-shadow: 8px 8px 0px var(--ruby-red);
         }
 
-        .memory-card {
-            grid-column: span 2;
-            border: 2px double var(--primary-black);
-        }
+        .memory-card { grid-column: span 2; border: 2px double var(--primary-black); }
 
-        /* Pop-up Overlay */
         #letter-overlay {
             position: fixed;
             top: 0;
@@ -134,23 +123,17 @@
             padding: 40px 25px;
             border: 1px solid var(--primary-black);
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            position: relative;
         }
 
         #memoryImage {
             width: 100%;
-            filter: sepia(0.3) contrast(1.1); /* Vintage photo filter */
+            filter: sepia(0.3) contrast(1.1);
             border: 1px solid var(--primary-black);
             margin-bottom: 20px;
             display: none;
         }
 
-        #textContent {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--primary-black);
-            margin-bottom: 30px;
-        }
+        #textContent { font-size: 1.25rem; line-height: 1.8; color: var(--primary-black); margin-bottom: 30px; }
     </style>
 </head>
 <body>
@@ -189,15 +172,62 @@
     <script>
         const secretPassword = "coconut";
 
-        const generate = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 1}`);
+        // Placeholders for remaining notes
+        const generate = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 101}`);
 
         const library = {
-            missMe: ["My heart is wherever you are.", ...generate("Note", 249)],
-            feelingLow: ["You are my greatest strength.", ...generate("Affirmation", 249)],
-            reasons: ["Reason #1: Your elegance.", "Reason #2: Your loyalty.", ...generate("Reason", 248)],
-            coupon: ["🎟 [x5] 1920s Movie Night", ...generate("Coupon", 99)]
+            missMe: [
+                "My heart is wherever you are.", "Distance is but a temporary inconvenience.", "Every clock tick feels like a year without you.",
+                "Thinking of you is my favorite pastime.", "You are the missing piece to my peace.", "The stars look different when I'm not with you.",
+                "Counting the days until 'us' becomes 'here'.", "A day without you is a day misspent.", "You are the poetry I never knew how to write.",
+                "My thoughts always find their way back to you.", "I am currently living for our next reunion.", "Missing you is a quiet ache I carry with pride.",
+                "You are worth every mile between us.", "I'd walk to you if the oceans would let me.", "Your name is my favorite word.",
+                "Sending a kiss across the coordinates.", "The silence is too loud when you aren't around.", "You’re the best thing I’ve ever waited for.",
+                "Half of me is currently hundreds of miles away.", "Come back soon; the house feels empty without your spirit.", "I love you more than the miles can measure.",
+                "Our love story is my favorite legacy.", "You are my North Star.", "Until we meet again, I’ll see you in my dreams.",
+                "I’m wearing your favorite scent today just to feel you.", "The sun doesn't shine quite as bright without you.", "You are my favorite 'Always'.",
+                "Miles may lie between us, but never our hearts.", "I miss the way you look at me.", "Every love song is suddenly about you.",
+                "You are the anchor in my storm.", "I'm holding a spot for you right here next to me.", "Wishing I could reach through the screen and hold your hand.",
+                "My soul recognizes yours from a lifetime ago.", "Just a small note to say: You are everything.",
+                "They say absence makes the heart grow fonder, but mine was already overflowing with you.", "If I had a flower for every time I thought of you, I could walk through my garden forever.",
+                "I find pieces of you in the music I hear and the books I read. You are everywhere and nowhere all at once.", "The geography of our love is vast, but my heart has a perfect map straight to you.",
+                "I miss the quiet moments—the way you breathe when you're focused, the way you hum without realizing it.", "Distance is just a test to see how far love can travel. Our love has already circled the globe.",
+                "I am a traveler, and you are my destination. Every day is just a step closer to home.", "There is a specific kind of hollow in my chest that only your hug can fill.",
+                "I look at the moon and wonder if you're looking at it too, feeling the same pull I do.", "You are the vintage wine of my life—timeless, intoxicating, and better with every passing year.",
+                "I would wait a thousand lifetimes for one afternoon spent in your company.", "They don't make love stories like ours anymore. It’s classic, enduring, and rare.",
+                "Your voice is the only melody that can calm my restless mind.", "Even in a room full of people, my eyes search for the ghost of your presence.",
+                "I don't just miss you; I miss the person I am when I'm standing next to you.", "Every sunset I watch alone is a sunset I owe you when we are reunited.",
+                "Our love is like an old film—grainy, beautiful, and meant to be watched over and over.", "I’m counting the breaths until I can finally breathe the same air as you again.",
+                "You aren't just my partner; you are my sanctuary.", "The world is too big, but your arms are the perfect size.",
+                "I keep our memories tucked away like pressed flowers in a ledger.", "If longing was a currency, I’d be the wealthiest person alive.",
+                "You are the 'Greatest Generation' of my heart.", "I am keeping a journal of all the things I want to tell you when I see you.",
+                "Distance doesn't ruin relationships; doubt does. And I have never been more certain of you.", "You are the protagonist in every dream I have.",
+                "I miss the way your hand feels perfectly slotted into mine.", "My heart beats in a rhythm that spells out your name.",
+                "The thought of your smile is the only thing getting me through this week.", "I wish I could bottle up your laugh and keep it on my nightstand.",
+                "You are the gold at the end of every difficult day.", "Time is a thief, stealing hours away from us. I want them all back.",
+                "You are my favorite 'once in a lifetime'.", "I love you with a depth that scares me and a certainty that saves me.",
+                "Whatever our souls are made of, yours and mine are the same.", "I'm officially filing a formal complaint against the miles between us.",
+                "I love you more than I love complaining about the distance (which is a lot).", "Warning: Lack of your presence is causing a significant decline in my mood.",
+                "You’re lucky you’re so cute, otherwise this distance would be unacceptable.", "I miss your face. And your voice. And your existence in general.",
+                "Current status: Dreaming of the day I don't have to say goodbye to a screen.", "I’ve decided that the world is simply too large. Can we shrink it?",
+                "I’m 99% sure I’m addicted to you. Withdrawal is tough.", "You owe me approximately one million hugs upon arrival.",
+                "If you were here, I’d probably be annoying you right now. Don't you miss that?", "I’m keeping your side of the bed warm, but it’s doing a terrible job of being you.",
+                "Hurry back—I’m running out of patience and clean hoodies.", "You are the only person I’d do this for. You’re very special.",
+                "I miss you like a desert misses the rain (yes, I’m being dramatic).", "Just checking in to make sure you know you're the best thing that ever happened to me.",
+                "My phone is bored of me. It wants to see your face.", "FaceTime is a poor substitute for the real thing, but I’ll take what I can get.",
+                "I miss you more than a morning person misses their sleep.", "Counting down the minutes... only about 43,000 to go!",
+                "You're my favorite person to miss.", "I've practiced my 'Airport Run' hug. It’s going to be legendary.",
+                "I miss your stupid jokes that I pretend aren't funny.", "Can we fast-forward to the part where we’re in the same room?",
+                "I miss you a 'ridiculous amount'.", "If you were here, I’d make you tea and we’d talk until sunrise.",
+                "You are my favorite notification.", "My heart does a little skip when I see your name on my screen.",
+                "I miss the 'us' that only exists when we're physically together.", "You’re the only person I want to do absolutely nothing with.",
+                "I miss you. That is all. (For the 100th time today).",
+                ...generate("Missing You", 150)
+            ],
+            feelingLow: generate("Encouragement", 250),
+            reasons: generate("Reason I Love You", 250),
+            coupon: generate("LDR Coupon", 100)
         };
-
         const memories = [
             {
                 url: "https://i.ibb.co/fdHhgZX4/photo.jpg",
@@ -213,27 +243,21 @@
             }
         ];
 
-        function getSeen(cat) {
-            const seen = localStorage.getItem('seen_' + cat);
-            return seen ? JSON.parse(seen) : [];
-        }
-
-        function saveSeen(cat, index) {
-            const seen = getSeen(cat);
-            seen.push(index);
-            localStorage.setItem('seen_' + cat, JSON.stringify(seen));
+        function getSeen(cat) { return JSON.parse(localStorage.getItem('seen_' + cat) || "[]"); }
+        function saveSeen(cat, index) { 
+            const seen = getSeen(cat); 
+            seen.push(index); 
+            localStorage.setItem('seen_' + cat, JSON.stringify(seen)); 
         }
 
         function showRandomUnseen(cat) {
             const seen = getSeen(cat);
             const available = library[cat].map((_, i) => i).filter(i => !seen.includes(i));
-
-            if (available.length === 0) {
-                document.getElementById('textContent').innerText = "Every letter has been read, my love.";
-            } else {
-                const randomIndex = available[Math.floor(Math.random() * available.length)];
-                document.getElementById('textContent').innerText = library[cat][randomIndex];
-                saveSeen(cat, randomIndex);
+            if (available.length === 0) { document.getElementById('textContent').innerText = "Every letter read."; }
+            else {
+                const idx = available[Math.floor(Math.random() * available.length)];
+                document.getElementById('textContent').innerText = library[cat][idx];
+                saveSeen(cat, idx);
             }
             document.getElementById('memoryImage').style.display = 'none';
             document.getElementById('letter-overlay').style.display = 'flex';
@@ -241,9 +265,8 @@
 
         function showOrdered() {
             let count = parseInt(localStorage.getItem('count_reasons') || "0");
-            if (count >= library.reasons.length) {
-                document.getElementById('textContent').innerText = "All 250 reasons have been told.";
-            } else {
+            if (count >= library.reasons.length) { document.getElementById('textContent').innerText = "All reasons told."; }
+            else {
                 document.getElementById('textContent').innerText = library.reasons[count];
                 localStorage.setItem('count_reasons', count + 1);
             }
@@ -254,8 +277,7 @@
         function showMemory() {
             const pick = memories[Math.floor(Math.random() * memories.length)];
             const img = document.getElementById('memoryImage');
-            img.src = pick.url;
-            img.style.display = 'block';
+            img.src = pick.url; img.style.display = 'block';
             document.getElementById('textContent').innerText = pick.text;
             document.getElementById('letter-overlay').style.display = 'flex';
         }
@@ -266,7 +288,6 @@
                 document.getElementById('main-content').classList.remove('hidden');
             } else { alert("Incorrect credentials."); }
         }
-
         function closeLetter() { document.getElementById('letter-overlay').style.display = 'none'; }
     </script>
 </body>
