@@ -131,9 +131,9 @@
 
         .letter-content {
             background: white;
-            width: 80%;
-            max-width: 350px;
-            padding: 30px 25px;
+            width: 85%;
+            max-width: 380px;
+            padding: 30px 20px;
             border-radius: 30px;
             border: 3px solid var(--accent);
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
@@ -142,9 +142,11 @@
 
         #memoryImage {
             width: 100%;
+            max-height: 60vh; /* Prevents image from being too tall on phones */
             border-radius: 15px;
             margin-bottom: 15px;
             display: none;
+            object-fit: contain; /* Keeps original quality and shape */
         }
 
         #textContent {
@@ -222,15 +224,15 @@
                 "I love you more than the miles between us."
             ],
             coupon: [
-                "🎟️ COUPON: A FaceTime date where we play your favorite game (yes we can play minecraft ;)).",
-                "🎟️ COUPON: A 'Movie Night' where I let you pick the film (no complaining!).",
+                "🎟️ COUPON: A FaceTime date where we play your favorite game!",
+                "🎟️ COUPON: A 'Movie Night' where I let you pick the film.",
                 "🎟️ COUPON: A 10-minute 'I'm busy but I love you' phone call anytime."
             ]
         };
 
         const memories = [
             {
-                url: "https://i.ibb.co/fdHhgZX4/photo.jpg", 
+                url: "https://i.ibb.co/fdHhgZX4/photo.jpg", // MUST be i.ibb.co format for high quality
                 text: "The first time we met in person. I'll never forget that hug!"
             },
             {
