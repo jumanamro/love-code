@@ -108,6 +108,12 @@
             background: var(--soft-pink);
         }
 
+        .memory-card {
+            grid-column: span 2;
+            background: var(--accent);
+            color: white;
+        }
+
         /* Pop-up Overlay */
         #letter-overlay {
             position: fixed;
@@ -127,18 +133,25 @@
             background: white;
             width: 80%;
             max-width: 350px;
-            padding: 40px 25px;
+            padding: 30px 25px;
             border-radius: 30px;
             border: 3px solid var(--accent);
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             position: relative;
         }
 
+        #memoryImage {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
         #textContent {
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.5;
             color: #555;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-style: italic;
         }
 
@@ -154,7 +167,8 @@
 
     <div id="login-box">
         <h2 style="color: var(--accent);">🔒 Secret Access</h2>
-        <input type="password" id="passInput" placeholder="*******" inputmode="numeric">
+        <p>Enter your password:</p>
+        <input type="password" id="passInput" placeholder="*******">
         <br>
         <button onclick="unlock()">Enter My Heart</button>
     </div>
@@ -168,6 +182,7 @@
             <div class="card" onclick="showLetter('badDay')">Open when you're stressed</div>
             <div class="card" onclick="showLetter('loveNote')">Daily Love Note</div>
             <div class="card" onclick="showLetter('coupon')">LDR Coupon</div>
+            <div class="card memory-card" onclick="showMemory()">📸 Trip Down Memory Lane</div>
         </div>
 
         <p style="margin-top: 40px; font-size: 0.8rem; color: var(--accent);">I love you forever & always.</p>
@@ -175,6 +190,7 @@
 
     <div id="letter-overlay" onclick="closeLetter()">
         <div class="letter-content" onclick="event.stopPropagation()">
+            <img id="memoryImage" src="">
             <div id="textContent"></div>
             <button onclick="closeLetter()">Close</button>
             <div class="screenshot-note">Screenshot to save this!</div>
@@ -182,21 +198,20 @@
     </div>
 
     <script>
-        // --- CONFIGURATION ---
-        const secretPassword = "coconut"; // Change this to your 4-digit date
+        const secretPassword = "coconut";
 
         const library = {
             missMe: [
                 "I'm thinking about you right now too. Close your eyes, I'm hugging you! 🫂",
                 "Distance is just a test to see how far love can travel. We are winning.",
                 "I miss your voice. If you're free, send me a quick voice note of your day?",
-                "Look at the moon tonight; we're both under the same sky. 🌙",
+                "Look at the moon tonight; we're both under the same sky. 🌙"
             ],
             badDay: [
                 "I'm so sorry today was hard. You're the strongest person I know. ❤️",
                 "Take a deep breath. Inhale the good, exhale the stress. I'm in your corner.",
                 "Go wash your face with cold water. It's a tiny reset. I love you!",
-                "You are allowed to have a bad day, but remember you are still an incredible person to me.",
+                "You are allowed to have a bad day, but remember you are still incredible to me.",
                 "Whatever is bothering you won't matter in a year. But I'll still love you."
             ],
             loveNote: [
@@ -207,42 +222,51 @@
                 "I love you more than the miles between us."
             ],
             coupon: [
-                "🎟️ COUPON: AFaceTime date where we play your favorite game (yes we can play minecraft ;)).",
+                "🎟️ COUPON: A FaceTime date where we play your favorite game (yes we can play minecraft ;)).",
                 "🎟️ COUPON: A 'Movie Night' where I let you pick the film (no complaining!).",
-                "🎟️ COUPON: A 10-minute 'I'm busy but I love you' phone call anytime.",
+                "🎟️ COUPON: A 10-minute 'I'm busy but I love you' phone call anytime."
             ]
-        }
-            const memories = [
+        };
+
+        const memories = [
             {
-                url: "https://ibb.co/fdHhgZX4", 
+                url: "https://i.ibb.co/fdHhgZX4/photo.jpg", 
                 text: "The first time we met in person. I'll never forget that hug!"
             },
             {
-                url: "https://ibb.co/5X1gt3SG",
+                url: "https://i.ibb.co/5X1gt3SG/photo.jpg",
                 text: "Our favorite late-night FaceTime call. You fell asleep first! - 02/20/24"
             },
             {
-                url: "https://ibb.co/3mHvHZpr",
+                url: "https://i.ibb.co/3mHvHZpr/photo.jpg",
                 text: "The day you sent me those flowers. They smelled so good. - 03/05/24"
             }
-        ]
-        };
+        ];
 
-        // --- FUNCTIONS ---
         function unlock() {
             const input = document.getElementById('passInput').value;
             if(input === secretPassword) {
                 document.getElementById('login-box').classList.add('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
             } else {
-                alert("Wrong date! Try again, coconut.");
+                alert("Wrong password! Try again, coconut.");
             }
         }
 
         function showLetter(category) {
             const options = library[category];
             const pick = options[Math.floor(Math.random() * options.length)];
+            document.getElementById('memoryImage').style.display = 'none';
             document.getElementById('textContent').innerText = pick;
+            document.getElementById('letter-overlay').style.display = 'flex';
+        }
+
+        function showMemory() {
+            const pick = memories[Math.floor(Math.random() * memories.length)];
+            const img = document.getElementById('memoryImage');
+            img.src = pick.url;
+            img.style.display = 'block';
+            document.getElementById('textContent').innerText = pick.text;
             document.getElementById('letter-overlay').style.display = 'flex';
         }
 
@@ -250,11 +274,8 @@
             document.getElementById('letter-overlay').style.display = 'none';
         }
 
-        // Allow 'Enter' key to log in
         document.getElementById("passInput").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                unlock();
-            }
+            if (event.key === "Enter") { unlock(); }
         });
     </script>
 </body>
