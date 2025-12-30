@@ -197,14 +197,30 @@
         const generate = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 1}`);
 
         const library = {
-            missMe: ["I'm sending you a hug! 🫂", ...generate("Missing You Note", 249)],
-            feelingLow: ["You are incredible. ❤️", ...generate("Feeling Low Note", 249)],
-            reasons: ["Reason #1: Your kindness.", "Reason #2: Your laugh.", ...generate("Reason Why", 248)],
-            coupon: ["🎟️ [x5] Minecraft Date", ...generate("Coupon", 99)]
+            missMe: ["I'm sending you a hug! 🫂", 
+                     ...generate("Missing You Note", 249)],
+            feelingLow: ["You are incredible. ❤️", 
+                         ...generate("Feeling Low Note", 249)],
+            reasons: ["Reason #1: Your kindness.", "Reason #2: Your laugh.", 
+                      ...generate("Reason Why", 248)],
+            coupon: ["🎟️ [x5] Minecraft Date", 
+                     "🎟️ 1hr uninterrupted ft/call"
+                     ...generate("Coupon", 99)]
         };
 
         const memories = [
-            { url: "https://i.ibb.co/fdHhgZX4/photo.jpg", text: "The day we met!" }
+            {
+                url: "https://i.ibb.co/fdHhgZX4/photo.jpg", // MUST be i.ibb.co format for high quality
+                text: "The first time we met in person. I'll never forget that hug!"
+            },
+            {
+                url: "https://i.ibb.co/5X1gt3SG/photo.jpg",
+                text: "Our favorite late-night FaceTime call. You fell asleep first! - 02/20/24"
+            },
+            {
+                url: "https://i.ibb.co/3mHvHZpr/photo.jpg",
+                text: "The day you sent me those flowers. They smelled so good. - 03/05/24"
+            }
         ];
 
         // --- MINI-DATABASE (LocalStorage) ---
