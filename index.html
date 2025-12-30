@@ -172,6 +172,9 @@
     <script>
         const secretPassword = "coconut";
 
+        // This helper safely creates placeholders so they don't break the code
+        const generate = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 1}`);
+
         const library = {
             missMe: [
                 "My heart is wherever you are.", "Distance is such an inconvenience, but you're worth it.", "Time moves so slowly without you.",
@@ -221,7 +224,8 @@
                 "I miss you. That is all. (For the 100th time today).", "I miss that look of hunger in your eyes when im naked", 
                 "I miss having sex with you...the sloppy, wet, slow, timeless sex", "I'd love to make love to you right now but you're so freaking far", 
                 "Can we stargaze when you get back please? I want to look at the same stars together", "You're my definition of perfect",
-                "I'm not sure why you chose me, but I sure as hell won't let go ever hehe"
+                "I'm not sure why you chose me, but I sure as hell won't let go ever hehe",
+                ...generate("Miss You", 150)
             ],
             feelingLow: [
                 "Even the strongest pillars need a foundation to lean on. Let me be yours today.", "This feeling is a cloud, not the sky. It is passing through.", "You carry the weight of the world with such grace, but you don't have to carry it alone.",
@@ -238,7 +242,7 @@
                 "Your heart is a sanctuary, not a prison. Let the heavy thoughts out.", "You are dignified, you are resilient, and you are mine.", "Focus on the next five minutes. That’s all you have to handle right now.",
                 "Success is simply getting up one more time than you fall.", "I am so proud of the person you are becoming, even in the struggle.", "You don't need to be perfect to be worthy of love.",
                 "I love you in the highs, and I love you even more in the lows.", "Breathe. You've got this.", "You are so loved.", "I believe in you.", "One step at a time.", "You are stronger than this moment.",
-                "This feeling is temporary.", "I am your biggest fan.", "Be kind to your mind.", "You are a light in the dark.", "Your soul is vintage gold.", "Everything will be okay.", "I'm right here with you.",
+                "This feeling is temporary.", "I am your biggest fan.", "Be kind to your mind.", "You are a light in the dark.", "Your soul is vintage gold.", "Everything will be okay.", "I'm right here with with you.",
                 "Don't give up on yourself.", "You are my favorite human.", "Chin up, coconut.", "You are a warrior in a silk suit.", "Protect your peace.", "You are doing your best.", "I am so proud of you.",
                 "You are not your mistakes.", "I'm sending you all my strength.", "You are an overcomer.", "Slow down. It's okay.", "Your heart is safe with me.", "You are incredibly brave.", "A bad day is not a bad life.",
                 "You are the prize.", "Stay gentle.", "I miss your smile, but I love your soul.", "You are essential to me.", "Trust the process.", "You are a rare gem.", "I’m in your corner. Forever.", "Let it go for now.", "You are simply wonderful.",
@@ -286,7 +290,7 @@
                 "I am so glad you're mine.", "You are my favorite everything.", "Your love is a classic.", "I'll never get tired of you.", "You are the best of the best.", "I'm obsessed with your mind.", "You are the real deal.",
                 "My heart is yours. Forever.", "You are my sunshine.", "I love you, coconut.", "You are my whole world."
             ],
-            reasons: generate("Reason I Love You", 250),
+            reasons: generate("Reason", 250),
             coupon: generate("LDR Coupon", 100)
         };
 
@@ -296,6 +300,7 @@
             { url: "https://i.ibb.co/3mHvHZpr/photo.jpg", text: "snap filters in our ev room where everything hot started 😉" }
         ];
 
+        // LOGIC FUNCTIONS
         function getSeen(cat) { return JSON.parse(localStorage.getItem('seen_' + cat) || "[]"); }
         function saveSeen(cat, index) { 
             const seen = getSeen(cat); 
