@@ -112,8 +112,6 @@
             padding: 30px;
             border-radius: 30px;
             border: 3px solid var(--accent);
-            max-height: 80vh;
-            overflow-y: auto;
         }
     </style>
 </head>
@@ -129,10 +127,10 @@
     <div id="main-content" class="hidden">
         <h1>For My Coconut ❤️</h1>
         <div class="grid">
-            <div class="card" onclick="showLetter('missMe')">Open when you miss me</div>
-            <div class="card" onclick="showLetter('feelingLow')">Open when you're feeling low</div>
-            <div class="card" onclick="showLetter('reasons')">Reasons I Love You</div>
-            <div class="card" onclick="showLetter('coupon')">LDR Coupons</div>
+            <div class="card" onclick="showNext('missMe')">Open when you miss me</div>
+            <div class="card" onclick="showNext('feelingLow')">Open when you're feeling low</div>
+            <div class="card" onclick="showOrderedReason()">Reasons I Love You</div>
+            <div class="card" onclick="showNext('coupon')">LDR Coupons</div>
             <div class="card memory-card" onclick="showMemory()">📸 Trip Down Memory Lane</div>
         </div>
     </div>
@@ -149,74 +147,71 @@
     <script>
         const secretPassword = "coconut";
 
-        // Create large arrays
-        const generatePlaceholders = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 1}: Write your custom note here!`);
+        // Generate the massive lists
+        const generate = (txt, count) => Array.from({length: count}, (_, i) => `${txt} #${i + 1}`);
 
         const library = {
-            missMe: [
-                "I'm probably wearing your hoodie right now just to feel you close. 🧸",
-                "Look at the moon; we're both under the same sky. 🌙",
-                "I miss your laugh more than anything today.",
-                ...generatePlaceholders("Missing You Note", 247)
-            ],
-            feelingLow: [
-                "You are so much stronger than you feel in this moment ❤️",
-                "Take a deep breath. I am always in your corner, no matter what.",
-                "I wish I could be there to hold you. For now, imagine a big hug from me.",
-                ...generatePlaceholders("Encouragement Note", 247)
-            ],
-            reasons: [
-                "I love the way you always make me feel safe.",
-                "I love your passion for the things you care about.",
-                "I love how we can talk for hours about absolutely nothing.",
-                ...generatePlaceholders("Reason I Love You", 247)
-            ],
-            coupon: [
-                "🎟️ [x5 USES] One 30-minute Minecraft/Gaming date on demand!",
-                "🎟️ [x5 USES] I'll record a voice note telling you about my whole day.",
-                "🎟️ [x1 USE] One surprise delivery of your favorite snack.",
-                ...generatePlaceholders("LDR Coupon", 97)
-            ]
+            missMe: ["I miss you so much! 🫂", ...generate("Miss Me Note", 249)],
+            feelingLow: ["You are incredible. ❤️", ...generate("Feeling Low Note", 249)],
+            reasons: ["Reason #1: Your kindness.", "Reason #2: Your laugh.", ...generate("Reason Why", 248)],
+            coupon: ["🎟️ [x5] Minecraft Date", ...generate("Coupon", 99)]
         };
 
-        const memories = [
-            {
-                url: "https://i.ibb.co/fdHhgZX4/photo.jpg",
-                text: "first time you took me out for breakfast ❤️"
-            },
-            {
-                url: "https://i.ibb.co/5X1gt3SG/photo.jpg",
-                text: "you looked icredibly hot here (and im sure you felt hot after spicy ramen hehe)"
-            },
-            {
-                url: "https://i.ibb.co/3mHvHZpr/photo.jpg",
-                text: "snap filters in  our EV room (where all the hot stuff happened)"
+        // State tracking
+        let indices = { missMe: 0, feelingLow: 0, coupon: 0, reasons: 0 };
+
+        // Shuffle function for "random but once"
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
-        ];
+        }
+
+        // Shuffle the randomized categories on start
+        shuffle(library.missMe);
+        shuffle(library.feelingLow);
+        shuffle(library.coupon);
+
+        function showNext(cat) {
+            if (indices[cat] >= library[cat].length) {
+                document.getElementById('textContent').innerText = "You've seen them all! Refresh the page to see them again.";
+            } else {
+                const pick = library[cat][indices[cat]];
+                indices[cat]++;
+                document.getElementById('memoryImage').style.display = 'none';
+                document.getElementById('textContent').innerText = pick;
+            }
+            document.getElementById('letter-overlay').style.display = 'flex';
+        }
+
+        function showOrderedReason() {
+            if (indices.reasons >= library.reasons.length) {
+                document.getElementById('textContent').innerText = "You've read all 250 reasons! ❤️";
+            } else {
+                const pick = library.reasons[indices.reasons];
+                indices.reasons++;
+                document.getElementById('memoryImage').style.display = 'none';
+                document.getElementById('textContent').innerText = pick;
+            }
+            document.getElementById('letter-overlay').style.display = 'flex';
+        }
+
+        function showMemory() {
+            // Memories remain truly random
+            const memories = [{url: "", text: "Add your memory here!"}];
+            const pick = memories[Math.floor(Math.random() * memories.length)];
+            const img = document.getElementById('memoryImage');
+            if(pick.url) { img.src = pick.url; img.style.display = 'block'; }
+            document.getElementById('textContent').innerText = pick.text;
+            document.getElementById('letter-overlay').style.display = 'flex';
+        }
 
         function unlock() {
             if(document.getElementById('passInput').value === secretPassword) {
                 document.getElementById('login-box').classList.add('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
             } else { alert("Try again!"); }
-        }
-
-        function showLetter(cat) {
-            const pick = library[cat][Math.floor(Math.random() * library[cat].length)];
-            document.getElementById('memoryImage').style.display = 'none';
-            document.getElementById('textContent').innerText = pick;
-            document.getElementById('letter-overlay').style.display = 'flex';
-        }
-
-        function showMemory() {
-            const pick = memories[Math.floor(Math.random() * memories.length)];
-            const img = document.getElementById('memoryImage');
-            if(pick.url.includes('ibb.co')) {
-                img.src = pick.url;
-                img.style.display = 'block';
-            }
-            document.getElementById('textContent').innerText = pick.text;
-            document.getElementById('letter-overlay').style.display = 'flex';
         }
 
         function closeLetter() { document.getElementById('letter-overlay').style.display = 'none'; }
