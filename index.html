@@ -14,11 +14,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(180deg, #fdf0f0 0%, #ffc2d1 100%);
             text-align: center;
             padding: 20px;
-            color: var(--text-color);
             margin: 0;
             min-height: 100vh;
             display: flex;
@@ -58,9 +57,6 @@
             cursor: pointer;
             color: white;
             font-weight: bold;
-            font-size: 16px;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(251, 111, 146, 0.4);
         }
 
         .grid {
@@ -68,9 +64,8 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-top: 30px;
-            padding: 10px;
-            width: 100%;
             max-width: 500px;
+            width: 100%;
         }
 
         .card {
@@ -80,14 +75,14 @@
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
-            height: 120px;
+            height: 110px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.95rem;
             box-shadow: 0 6px 15px rgba(0,0,0,0.05);
             border: 1px solid var(--pink);
+            font-size: 0.9rem;
         }
 
         .memory-card {
@@ -102,8 +97,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -113,30 +108,12 @@
         .letter-content {
             background: white;
             width: 85%;
-            max-width: 400px;
-            padding: 25px;
+            max-width: 380px;
+            padding: 30px;
             border-radius: 30px;
             border: 3px solid var(--accent);
-            position: relative;
-        }
-
-        #memoryImage {
-            width: 100%;
-            height: auto;
-            max-height: 50vh;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            display: none;
-            /* Fixes blurriness on high-res screens */
-            image-rendering: -webkit-optimize-contrast; 
-            object-fit: contain;
-        }
-
-        #textContent {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #555;
-            margin-bottom: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -144,27 +121,27 @@
 
     <div id="login-box">
         <h2 style="color: var(--accent);">🔒 Secret Access</h2>
-        <input type="password" id="passInput" placeholder="*******">
+        <input type="password" id="passInput" placeholder="Enter Password">
         <br>
         <button onclick="unlock()">Enter My Heart</button>
     </div>
 
     <div id="main-content" class="hidden">
-        <h1>Hi my love! ❤️</h1>
-        
+        <h1>For My Coconut ❤️</h1>
         <div class="grid">
             <div class="card" onclick="showLetter('missMe')">Open when you miss me</div>
-            <div class="card" onclick="showLetter('badDay')">Open when you're stressed</div>
-            <div class="card" onclick="showLetter('loveNote')">Daily Love Note</div>
-            <div class="card" onclick="showLetter('coupon')">LDR Coupon</div>
+            <div class="card" onclick="showLetter('feelingLow')">Open when you're feeling low</div>
+            <div class="card" onclick="showLetter('reasons')">Reasons I Love You</div>
+            <div class="card" onclick="showLetter('coupon')">LDR Coupons</div>
             <div class="card memory-card" onclick="showMemory()">📸 Trip Down Memory Lane</div>
         </div>
     </div>
 
     <div id="letter-overlay" onclick="closeLetter()">
         <div class="letter-content" onclick="event.stopPropagation()">
-            <img id="memoryImage" src="">
-            <div id="textContent"></div>
+            <img id="memoryImage" src="" style="width:100%; border-radius:15px; display:none; margin-bottom:15px;">
+            <div id="textContent" style="font-size: 1.2rem; font-style: italic; color: #555;"></div>
+            <br>
             <button onclick="closeLetter()">Close</button>
         </div>
     </div>
@@ -172,18 +149,38 @@
     <script>
         const secretPassword = "coconut";
 
+        // Create large arrays
+        const generatePlaceholders = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 1}: Write your custom note here!`);
+
         const library = {
-            missMe: ["I miss you so much! 🫂", "Distance means so little when someone means so much."],
-            badDay: ["I'm so proud of you. Take a deep breath. ❤️"],
-            loveNote: ["You are my favorite thought. Every single day."],
-            coupon: ["🎟️ COUPON: One surprise lunch delivery!"]
+            missMe: [
+                "I'm probably wearing your hoodie right now just to feel you close. 🧸",
+                "Look at the moon; we're both under the same sky. 🌙",
+                "I miss your laugh more than anything today.",
+                ...generatePlaceholders("Missing You Note", 247)
+            ],
+            feelingLow: [
+                "You are so much stronger than you feel in this moment. ❤️",
+                "Take a deep breath. I am always in your corner, no matter what.",
+                "I wish I could be there to hold you. For now, imagine a big hug from me.",
+                ...generatePlaceholders("Encouragement Note", 247)
+            ],
+            reasons: [
+                "I love the way you always make me feel safe.",
+                "I love your passion for the things you care about.",
+                "I love how we can talk for hours about absolutely nothing.",
+                ...generatePlaceholders("Reason I Love You", 247)
+            ],
+            coupon: [
+                "🎟️ [x5 USES] One 30-minute Minecraft/Gaming date on demand!",
+                "🎟️ [x5 USES] I'll record a voice note telling you about my whole day.",
+                "🎟️ [x1 USE] One surprise delivery of your favorite snack.",
+                ...generatePlaceholders("LDR Coupon", 97)
+            ]
         };
 
         const memories = [
-            {
-                url: "https://i.ibb.co/XXXXXXXX/your-photo.jpg", 
-                text: "Add your memory text here!"
-            }
+            { url: "https://i.ibb.co/your-link.jpg", text: "Replace this with your high-quality ImgBB direct link!" }
         ];
 
         function unlock() {
@@ -193,8 +190,8 @@
             } else { alert("Try again!"); }
         }
 
-        function showLetter(category) {
-            const pick = library[category][Math.floor(Math.random() * library[category].length)];
+        function showLetter(cat) {
+            const pick = library[cat][Math.floor(Math.random() * library[cat].length)];
             document.getElementById('memoryImage').style.display = 'none';
             document.getElementById('textContent').innerText = pick;
             document.getElementById('letter-overlay').style.display = 'flex';
@@ -203,8 +200,10 @@
         function showMemory() {
             const pick = memories[Math.floor(Math.random() * memories.length)];
             const img = document.getElementById('memoryImage');
-            img.src = pick.url;
-            img.style.display = 'block';
+            if(pick.url.includes('ibb.co')) {
+                img.src = pick.url;
+                img.style.display = 'block';
+            }
             document.getElementById('textContent').innerText = pick.text;
             document.getElementById('letter-overlay').style.display = 'flex';
         }
