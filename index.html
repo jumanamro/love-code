@@ -172,9 +172,6 @@
     <script>
         const secretPassword = "coconut";
 
-        // Placeholders for remaining notes
-        const generate = (prefix, count) => Array.from({length: count}, (_, i) => `${prefix} #${i + 101}`);
-
         const library = {
             missMe: [
                 "My heart is wherever you are.", "Distance is such an inconvenience, but you're worth it.", "Time moves so slowly without you.",
@@ -226,23 +223,77 @@
                 "Can we stargaze when you get back please? I want to look at the same stars together", "You're my definition of perfect",
                 "I'm not sure why you chose me, but I sure as hell won't let go ever hehe"
             ],
-            feelingLow: generate("Encouragement", 250),
+            feelingLow: [
+                "Even the strongest pillars need a foundation to lean on. Let me be yours today.", "This feeling is a cloud, not the sky. It is passing through.", "You carry the weight of the world with such grace, but you don't have to carry it alone.",
+                "Take a breath. You are safe, you are loved, and you are enough.", "Your worth is not measured by your productivity or your mood.", "In the quiet moments of doubt, remember that I believe in you unconditionally.",
+                "You have survived 100% of your hardest days. Your track record is perfect.", "Allow yourself the grace to be human today.", "The sun is temporarily hidden, but it hasn't ceased to exist. Neither has your light.",
+                "You are the architect of your life, but even architects need a rest from the blueprint.", "Rest is not a luxury; it is a necessity for a soul as vibrant as yours.", "Softness is not weakness. It takes great strength to be gentle with yourself.",
+                "Whatever is heavy on your heart, we will unpack it together soon.", "You are far more capable than your current anxiety is telling you.", "Be as patient with yourself as you are with the rest of the world.",
+                "Your existence alone is a triumph.", "The tide goes out, but it always, always comes back in.", "You don't have to have it all figured out right now.",
+                "Small steps still cover great distances.", "You are precious metal; the fire only refines you.", "Your mind is playing tricks on you. My heart knows the truth: you are incredible.",
+                "The world is better because you are in it, even on the days you feel invisible.", "I am holding space for you to just 'be' today. No pressure, no expectations.", "You are the protagonist of a very beautiful story. This is just a difficult chapter.",
+                "Look at how far you've come. That didn't happen by accident.", "Peace isn't the absence of a storm; it's the calm in the center of it. Find your center.", "You are more than enough. You are everything.",
+                "Close your eyes and feel my hand in yours. I'm not letting go.", "Drink some water, take a walk, or simply sit still. Your body deserves kindness.", "Don't believe everything you think when you're tired.",
+                "You are a masterpiece in progress.", "If you can't find a reason to smile today, I have enough reasons for both of us.", "This too shall pass, and I will be right here when it does.",
+                "Your heart is a sanctuary, not a prison. Let the heavy thoughts out.", "You are dignified, you are resilient, and you are mine.", "Focus on the next five minutes. That’s all you have to handle right now.",
+                "Success is simply getting up one more time than you fall.", "I am so proud of the person you are becoming, even in the struggle.", "You don't need to be perfect to be worthy of love.",
+                "I love you in the highs, and I love you even more in the lows.", "Breathe. You've got this.", "You are so loved.", "I believe in you.", "One step at a time.", "You are stronger than this moment.",
+                "This feeling is temporary.", "I am your biggest fan.", "Be kind to your mind.", "You are a light in the dark.", "Your soul is vintage gold.", "Everything will be okay.", "I'm right here with you.",
+                "Don't give up on yourself.", "You are my favorite human.", "Chin up, coconut.", "You are a warrior in a silk suit.", "Protect your peace.", "You are doing your best.", "I am so proud of you.",
+                "You are not your mistakes.", "I'm sending you all my strength.", "You are an overcomer.", "Slow down. It's okay.", "Your heart is safe with me.", "You are incredibly brave.", "A bad day is not a bad life.",
+                "You are the prize.", "Stay gentle.", "I miss your smile, but I love your soul.", "You are essential to me.", "Trust the process.", "You are a rare gem.", "I’m in your corner. Forever.", "Let it go for now.", "You are simply wonderful.",
+                "Imagine we are sitting in a quiet library, the world outside is irrelevant. That is our peace.", "Diamonds are created under pressure. You are becoming something brilliant.", "Your value doesn't decrease based on someone's inability to see your worth.",
+                "The most beautiful gardens need rain to grow. Today is just a rainy day.", "If the world feels too loud, turn down the volume and listen to my heart instead.", "You are not a burden. You are a blessing that I get to cherish.",
+                "Comparison is the thief of joy. Your journey is unique and classic.", "The stars only shine because of the darkness. You’re doing great.", "You have a grace that cannot be taught and a spirit that cannot be broken.",
+                "I wish you could see yourself through my eyes for just one minute.", "You are the calm in my chaos; let me be the light in yours.", "Nothing can take away your inherent dignity.", "When you feel like you're drowning, remember that I am your life vest.",
+                "Every setback is a setup for a comeback.", "You are handled with care. You are precious to me.", "The morning always comes. Hold on just a little longer.", "You are smarter, kinder, and more important than you give yourself credit for.",
+                "Don't let the world make you hard. Your softness is your power.", "I am already looking forward to the next time I see you laugh.", "You are a classic—never out of style, always in my heart.", "Give yourself permission to do nothing today.",
+                "Your peace of mind is worth more than any achievement.", "I am sending you a virtual hug that lasts as long as you need.", "You've survived the worst, you'll survive this too.", "I love you. Deeply. Truly. Always.",
+                "Character is forged in the quiet persistence of difficult days.", "Do not confuse a season of rest with a lifetime of stagnation.", "You possess a quiet dignity that no temporary circumstance can take away.",
+                "The most exquisite marble must endure the chisel to become a masterpiece.", "Your value is intrinsic; it does not fluctuate with the stock market of your emotions.", "Stand tall; you come from a lineage of survivors and dreamers.",
+                "A ship is safe in harbor, but that is not what ships are built for. You were built to weather this.", "Integrity is staying true to yourself when the world feels chaotic.", "You are the master of your fate; today is just one page of the captain's log.",
+                "Let the world be loud; your inner peace is a private sanctuary.", "There is a classic strength in your silence.", "You don't need to shout to be heard by the people who truly matter.",
+                "Focus on your own pace; the finest things in life are never rushed.", "Class is staying gracious even when you are exhausted.", "You are an investment that will always yield a beautiful return.",
+                "True wealth is the resilience of the soul.", "Do not let the trivialities of today tarnish your golden spirit.", "You are a rare vintage; you only get better with time and experience.",
+                "Wisdom often arrives dressed as a difficult afternoon.", "You have the heart of a lion and the mind of a scholar.", "Maintain your composure; the storm is passing, but you remain.",
+                "Your legacy is not built on your easy days, but on how you handle the hard ones.", "A quiet mind is the ultimate luxury.", "You carry yourself with a grace that inspires me daily.",
+                "Quality is never an accident; it is the result of intelligent effort—like yours.", "Be the anchor when the waves are high.", "Your potential is a vast estate yet to be fully explored.",
+                "Simplicity is the ultimate sophistication. Just breathe today.", "You are the gold standard of my life.", "Every obstacle is an opportunity to refine your aim.",
+                "Fortune favors the brave, and you are the bravest person I know.", "You have a spirit that cannot be bought or broken.", "Let the rain wash away the dust of yesterday’s worries.",
+                "Your path is unique; do not compare your chapter one to someone else's chapter twenty.", "You are a pillar of strength in a world of sand.", "Patience is a virtue, especially when practiced toward yourself.",
+                "Keep your eyes on the horizon.", "You have the poise of a person who knows their own worth.", "Refinement comes through trial.", "You are a classic—unfazed by trends, enduring through time.",
+                "Your light is steady, even when the wind blows.", "Trust in the foundation you have built.", "An elegant soul is never truly defeated.", "You are the protagonist of a truly great epic.",
+                "The depth of your character is your greatest asset.", "Hold your head high; your crown is invisible but ever-present.", "You are an original in a world of copies.", "Your calm is a gift to everyone around you.",
+                "You are the very definition of resilience.", "I trust you. I trust your strength. I heart your heart.", "If you only did one thing today—breathe—you have done enough.",
+                "You are deserving of the same kindness you give so freely to others.", "I am sending you a quiet prayer for peace.", "Your feelings are valid, but they are not facts.", "It is okay to close the curtains and let the world wait for a while.",
+                "You are my favorite place to go when my own mind is a riot.", "I wish I could take this weight from your shoulders, but I will settle for holding your hand while you carry it.", "You are a masterpiece, even when you feel like a work in progress.",
+                "There is no rush to feel 'better'. Healing has no schedule.", "You are loved for who you are, not for what you do.", "I am so grateful for your existence.", "You make the world a softer place just by being in it.",
+                "Your heart is a treasure, and I will help you guard it.", "It's okay to not be okay right now.", "You are a blessing, even on your darkest days.", "Take the pressure off yourself; you are already winning.",
+                "I see your effort, and I admire your heart.", "You are the most beautiful thing I have ever known.", "Rest your eyes; tomorrow is a fresh canvas.", "Your tears are just your soul's way of releasing the pressure.",
+                "I am your safe harbor.", "You are the sun that my world revolves around.", "Be gentle with your heart; it has been through a lot.", "You are enough exactly as you are.", "I am here. I am staying. I am yours.",
+                "You are the bravest person I have ever met.", "Your vulnerability is a sign of your immense courage.", "I am so proud to be the one who gets to love you.", "You are a rare and beautiful gift.", "Everything is figure-out-able.",
+                "You are the calm after the storm.", "I believe in your dreams as much as I believe in you.", "You are the peace I searched for my whole life.", "Don't forget to look up at the stars tonight.", "You are far more loved than you can possibly imagine.",
+                "Your smile is the light of my life, but your heart is the soul of it.", "You are a diamond in the rough.", "Take all the time you need.", "You are the only person I want to talk to when things go wrong.",
+                "You are my favorite adventure.", "Your mind is a beautiful place; don't let the shadows stay there too long.", "I am sending you a million hugs through the air.", "You are the best thing that ever happened to me.",
+                "You are my home.", "Your strength inspires me to be better.", "You are a work of art.", "I love the way you see the world.", "You are my person. Period.", "You are so precious to me.", "I love you. Just as you are. Right now.",
+                "You are a classic—beautiful yesterday, today, and tomorrow.", "The stars don't compete with the moon; they just shine. You do the same.", "Your worth is non-negotiable.", "You are the heartbeat of my happiness.",
+                "In a world of noise, you are my favorite silence.", "You have a spirit that is as wide as the ocean.", "You are the silver lining in every cloud.", "Don't let the small things steal your big joy.", "You are a masterpiece of grace and grit.",
+                "I am so lucky to walk through life with you.", "Your kindness is your superpower.", "You are the poetry that my soul needed.", "Every day with you is a gift I don't deserve.", "You are the anchor that keeps me grounded.",
+                "Your love is the only luxury I truly need.", "You are a rare find.", "I trust you with my whole heart.", "You are my favorite 'Always and Forever'.", "The world is a better place because you breathe.", "You are the light at the end of every tunnel.",
+                "Your heart is made of pure gold.", "You are my greatest achievement.", "I love the way you think.", "You are my favorite subject to study.", "You are the only one for me.", "Your presence is my peace.",
+                "You are the song I'll never stop singing.", "I am so proud of your growth.", "You are a legend in the making.", "Your love is my favorite place to be.", "You are the definition of beautiful.", "I am always on your side.",
+                "You are my favorite thought.", "Your soul is a garden.", "You are my dream come true.", "I love you more than words can say.", "You are my favorite 'Welcome Home'.", "Your heart is a masterpiece.", "You are the star of my show.",
+                "I am so glad you're mine.", "You are my favorite everything.", "Your love is a classic.", "I'll never get tired of you.", "You are the best of the best.", "I'm obsessed with your mind.", "You are the real deal.",
+                "My heart is yours. Forever.", "You are my sunshine.", "I love you, coconut.", "You are my whole world."
+            ],
             reasons: generate("Reason I Love You", 250),
             coupon: generate("LDR Coupon", 100)
         };
+
         const memories = [
-            {
-                url: "https://i.ibb.co/fdHhgZX4/photo.jpg",
-                text: "the time you took me out for breakfast ❤️"
-            },
-            {
-                url: "https://i.ibb.co/5X1gt3SG/photo.jpg",
-                text: "you look incredibly hot in this picture (i bet you felt hot too after spicy ramen hehe)"
-            },
-            {
-                url: "https://i.ibb.co/3mHvHZpr/photo.jpg",
-                text: "snap filters in our ev room where everything hot started 😉"
-            }
+            { url: "https://i.ibb.co/fdHhgZX4/photo.jpg", text: "the time you took me out for breakfast ❤️" },
+            { url: "https://i.ibb.co/5X1gt3SG/photo.jpg", text: "you look incredibly hot in this picture (i bet you felt hot too after spicy ramen hehe)" },
+            { url: "https://i.ibb.co/3mHvHZpr/photo.jpg", text: "snap filters in our ev room where everything hot started 😉" }
         ];
 
         function getSeen(cat) { return JSON.parse(localStorage.getItem('seen_' + cat) || "[]"); }
@@ -255,8 +306,9 @@
         function showRandomUnseen(cat) {
             const seen = getSeen(cat);
             const available = library[cat].map((_, i) => i).filter(i => !seen.includes(i));
-            if (available.length === 0) { document.getElementById('textContent').innerText = "Every letter read."; }
-            else {
+            if (available.length === 0) { 
+                document.getElementById('textContent').innerText = "Every letter read. ❤️"; 
+            } else {
                 const idx = available[Math.floor(Math.random() * available.length)];
                 document.getElementById('textContent').innerText = library[cat][idx];
                 saveSeen(cat, idx);
@@ -267,8 +319,9 @@
 
         function showOrdered() {
             let count = parseInt(localStorage.getItem('count_reasons') || "0");
-            if (count >= library.reasons.length) { document.getElementById('textContent').innerText = "All reasons told."; }
-            else {
+            if (count >= library.reasons.length) { 
+                document.getElementById('textContent').innerText = "All reasons told. ❤️"; 
+            } else {
                 document.getElementById('textContent').innerText = library.reasons[count];
                 localStorage.setItem('count_reasons', count + 1);
             }
